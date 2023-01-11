@@ -53,8 +53,11 @@ RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariad
 RUN isql ldap < backsql_create.sql
 RUN isql ldap < testdb_create.sql
 RUN isql ldap < testdb_data.sql
+WORKDIR "/usr/local/libexec/"
+RUN echo "wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/sku_github.schema -P /usr/local/etc/openldap/schema/" >> run.sh
+RUN echo "/usr/local/libexec/slapd" >> run.sh
 
-CMD ["/usr/local/libexec/slapd"]
+CMD ["sh","/usr/local/libexec/run.sh"]
 
 EXPOSE 389
 EXPOSE 389/udp
