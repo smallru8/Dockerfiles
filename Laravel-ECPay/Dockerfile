@@ -10,6 +10,7 @@ RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 RUN docker-php-ext-install pdo mbstring pdo_mysql
+RUN a2enmod rewrite
 WORKDIR /app
 COPY . /app
 RUN composer global require "laravel/installer"
