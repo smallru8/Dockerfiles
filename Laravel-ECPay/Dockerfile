@@ -18,5 +18,6 @@ RUN composer global require "laravel/installer"
 RUN composer global require "ecpay/sdk"
 RUN composer global require "laravel/jetstream"
 RUN composer global require "laravel/ui"
+RUN composer global require "sudiptpa/guid"
 WORKDIR /var/www/html
 #RUN ~/.composer/vendor/bin/laravel new laravel_project
