@@ -89,7 +89,7 @@ RUN wget -O /usr/local/etc/haproxy/haproxy.cfg https://filedn.com/l9k5h2JrTgHFHm
 WORKDIR /var/lib/haproxy
 RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/cloudflare_ddns.sh
 RUN chmod +x cloudflare_ddns.sh
-RUN wget -O /usr/local/bin/run.sh https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/hap/run.sh
+RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/hap/run.sh
 RUN chmod +x run.sh
 
 CMD ["/bin/bash","run.sh"]
