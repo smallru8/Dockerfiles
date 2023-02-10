@@ -1,7 +1,8 @@
 FROM haproxy:2.7-alpine
 
 USER root
-RUN apk update && apk add wget curl
+RUN apk update && apk add wget curl bash dos2unix
+RUN apk add --no-cache --upgrade grep
 
 WORKDIR /var/lib/haproxy
 RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/cloudflare_ddns.sh
