@@ -89,7 +89,10 @@ RUN wget -O /usr/local/etc/haproxy/haproxy.cfg https://filedn.com/l9k5h2JrTgHFHm
 WORKDIR /var/lib/haproxy
 RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/cloudflare_ddns.sh
 RUN chmod +x cloudflare_ddns.sh
+RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/hap/exit.sh
+RUN chmod +x exit.sh
 RUN echo "*/5 * * * * /bin/bash /var/lib/haproxy/cloudflare_ddns.sh" >> /var/spool/cron/crontabs/root
+RUN echo "*/5 * * * * /bin/bash /var/lib/haproxy/exit.sh" >> /var/spool/cron/crontabs/root
 RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/hap/run.sh
 RUN chmod +x run.sh
 
