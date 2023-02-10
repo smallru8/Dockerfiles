@@ -30,6 +30,7 @@ log() {
     #if [ "$1" ]; then
     #    echo -e "[$(date)] - $1" >> $log_file
     #fi
+    echo ""
 }
 #获取本机IP
 get_ip() {
