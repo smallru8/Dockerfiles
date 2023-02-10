@@ -14,4 +14,3 @@ RUN chmod +x docker-entrypoint.sh
 RUN echo "nameserver 2001:4860:4860::8844" >> /etc/resolv.conf
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
