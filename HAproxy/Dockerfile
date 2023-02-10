@@ -9,3 +9,4 @@ RUN chmod +x cloudflare_ddns.sh
 RUN echo "*/5 * * * * sh /var/lib/haproxy/cloudflare_ddns.sh" >> /var/spool/cron/crontabs/root
 RUN crond
 RUN wget -O /usr/local/etc/haproxy/haproxy.cfg https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/hap/haproxy.cfg
+RUN echo "nameserver 2001:4860:4860::8844" >> /etc/resolv.conf
