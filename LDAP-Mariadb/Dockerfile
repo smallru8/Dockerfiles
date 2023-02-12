@@ -21,7 +21,7 @@ WORKDIR "/tmp"
 RUN wget https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.3.tgz
 RUN tar zxvf openldap-2.6.3.tgz
 WORKDIR "/tmp/openldap-2.6.3"
-RUN ./configure --enable-sql --enable-ppolicy --enable-overlays --enable-modules
+RUN ./configure --enable-sql --enable-ppolicy --enable-overlays --enable-modules --with-tls=openssl
 RUN make depend
 RUN make
 WORKDIR "/tmp/openldap-2.6.3/servers"
