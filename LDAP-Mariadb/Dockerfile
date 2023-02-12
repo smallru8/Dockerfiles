@@ -15,7 +15,7 @@ ENV DB_PASSWD=
 RUN dnf update -y
 RUN dnf install -y dnf-plugins-core
 RUN dnf -y config-manager --set-enabled crb
-RUN dnf install -y wget libtool-ltdl unixODBC.x86_64 gcc unixODBC-devel.x86_64
+RUN dnf install -y wget libtool-ltdl unixODBC.x86_64 gcc unixODBC-devel.x86_64 openssl.x86_64 openssl-devel.x86_64
 RUN dnf --enablerepo=resilientstorage install -y libtool-ltdl-devel
 WORKDIR "/tmp"
 RUN wget https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.3.tgz
