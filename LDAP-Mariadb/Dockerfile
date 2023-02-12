@@ -13,7 +13,8 @@ ENV DB_USER=
 ENV DB_PASSWD=
 
 RUN dnf update -y
-RUN dnf install -y wget tar libtool-ltdl libtool-ltdl-devel unixODBC.x86_64 curl
+RUN dnf install -y wget tar libtool-ltdl unixODBC.x86_64 curl
+RUN dnf --enablerepo=resilientstorage install libtool-ltdl-devel
 WORKDIR "/tmp"
 RUN wget https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.3.tgz
 RUN tar zxvf openldap-2.6.3.tgz
