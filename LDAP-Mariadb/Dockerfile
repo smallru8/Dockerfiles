@@ -1,15 +1,16 @@
 FROM rockylinux:9.1
 MAINTAINER smallru8
 
+ENV LDAP_BASE_DN0=
 ENV LDAP_BASE_DN1=
 ENV LDAP_BASE_DN2=
 ENV LDAP_ROOT_PWD=
 
-ENV DB_IP=127.0.0.1
-ENV DB_NAME=db
+ENV DB_IP=
+ENV DB_NAME=
 ENV DB_PORT=3306
-ENV DB_USER=username
-ENV DB_PASSWD=d=password
+ENV DB_USER=
+ENV DB_PASSWD=
 
 RUN dnf update -y
 RUN dnf install -y wget tar libtool-ltdl libtool-ltdl-devel unixODBC.x86_64 curl
@@ -40,7 +41,7 @@ RUN echo "OPTION=4194304" >> /etc/odbc.ini
 WORKDIR "/usr/local/etc/openldap"
 RUN rm -rf slapd.conf
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/sldapd.conf
-RUN echo suffix          \"dc=${LDAP_BASE_DN1},dc=${LDAP_BASE_DN2}\" >> /usr/local/etc/openldap/slapd.conf
+RUN echo suffix          \"dc=${LDAP_BASE_DN0},dc=${LDAP_BASE_DN1},dc=${LDAP_BASE_DN2}\" >> /usr/local/etc/openldap/slapd.conf
 RUN echo rootdn          \"cn=root,dc=${LDAP_BASE_DN1},dc=${LDAP_BASE_DN2}\" >> /usr/local/etc/openldap/slapd.conf
 RUN echo rootpw          ${LDAP_ROOT_PWD} >> /usr/local/etc/openldap/slapd.conf
 RUN echo dbname          ldap >> /usr/local/etc/openldap/slapd.conf
