@@ -50,9 +50,7 @@ WORKDIR "/tmp"
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/backsql_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_data.sql
-RUN isql ldap < backsql_create.sql
-RUN isql ldap < testdb_create.sql
-RUN isql ldap < testdb_data.sql
+
 WORKDIR "/usr/local/libexec/"
 
 RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
@@ -61,6 +59,10 @@ RUN echo "do" >> run.sh
 RUN echo "sleep 5" >> run.sh
 RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
 RUN echo "done" >> run.sh
+
+RUN echo "isql ldap < /tmp/backsql_create.sql" >> run.sh
+RUN echo "isql ldap < /tmp/testdb_create.sql" >> run.sh
+RUN echo "isql ldap < /tmp/testdb_data.sql" >> run.sh
 
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
 
