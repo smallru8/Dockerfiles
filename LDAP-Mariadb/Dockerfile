@@ -55,9 +55,15 @@ RUN isql ldap < testdb_create.sql
 RUN isql ldap < testdb_data.sql
 WORKDIR "/usr/local/libexec/"
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
+
 RUN echo "wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/sku_github.schema -P /usr/local/etc/openldap/schema/" >> run.sh
 RUN echo "/usr/local/libexec/slapd" >> run.sh
-
+RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
+RUN echo "while [ \"$ip\" == \"\" ]" >> run.sh
+RUN echo "do" >> run.sh
+RUN echo "sleep 5" >> run.sh
+RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
+RUN echo "done" >> run.sh
 CMD ["sh","/usr/local/libexec/run.sh"]
 
 EXPOSE 389
