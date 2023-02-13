@@ -50,23 +50,24 @@ RUN echo rootpw          ${LDAP_ROOT_PWD} >> /usr/local/etc/openldap/slapd.conf
 RUN echo dbname          ldap >> /usr/local/etc/openldap/slapd.conf
 RUN echo dbuser          ${DB_USER} >> /usr/local/etc/openldap/slapd.conf
 RUN echo dbpasswd        ${DB_PASSWD} >> /usr/local/etc/openldap/slapd.conf
-WORKDIR "/tmp"
+
+WORKDIR "/usr/local/etc/openldap/dbschema"
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/backsql_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_data.sql
 
 WORKDIR "/usr/local/libexec/"
 
-RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
-RUN echo "while [ \"$ip\" == \"\" ]" >> run.sh
+RUN echo "ip=\$(curl -k -s https://checkip4.spdyn.de)" >> run.sh
+RUN echo "while [ \"\$ip\" == \"\" ]" >> run.sh
 RUN echo "do" >> run.sh
 RUN echo "sleep 5" >> run.sh
-RUN echo "ip=$(curl -k -s https://checkip6.spdyn.de)" >> run.sh
+RUN echo "ip=\$(curl -k -s https://checkip4.spdyn.de)" >> run.sh
 RUN echo "done" >> run.sh
 
-RUN echo "isql ldap < /tmp/backsql_create.sql" >> run.sh
-RUN echo "isql ldap < /tmp/testdb_create.sql" >> run.sh
-RUN echo "isql ldap < /tmp/testdb_data.sql" >> run.sh
+RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/backsql_create.sql" >> run.sh
+RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_create.sql" >> run.sh
+RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_data.sql" >> run.sh
 
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
 
