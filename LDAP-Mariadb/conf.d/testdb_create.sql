@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS IF NOT EXISTS persons (	id int NOT NULL,	name varchar(255) NOT NULL,	surname varchar(255) NOT NULL,	password varchar(64));
+CREATE TABLE IF NOT EXISTS (	id int NOT NULL,	name varchar(255) NOT NULL,	surname varchar(255) NOT NULL,	password varchar(64));
 CREATE TABLE IF NOT EXISTS institutes (	id int NOT NULL,	name varchar(255));
 CREATE TABLE IF NOT EXISTS documents (	id int NOT NULL,	title varchar(255) NOT NULL,	abstract varchar(255));
 CREATE TABLE IF NOT EXISTS authors_docs (	pers_id int NOT NULL,	doc_id int NOT NULL);
