@@ -45,7 +45,7 @@ WORKDIR "/usr/local/etc/openldap"
 RUN rm -rf slapd.conf
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/slapd.conf
 RUN echo "suffix          \"${LDAP_BASE_DN}\"" >> /usr/local/etc/openldap/slapd.conf
-RUN echo "rootdn          \"cn=root,dc=${LDAP_BASE_DN1},dc=${LDAP_BASE_DN2}\"" >> /usr/local/etc/openldap/slapd.conf
+RUN echo "rootdn          \"cn=root,${LDAP_BASE_DN}\"" >> /usr/local/etc/openldap/slapd.conf
 RUN echo "rootpw          ${LDAP_ROOT_PWD}" >> /usr/local/etc/openldap/slapd.conf
 RUN echo "dbname          ldap" >> /usr/local/etc/openldap/slapd.conf
 RUN echo "dbuser          ${DB_USER}" >> /usr/local/etc/openldap/slapd.conf
@@ -55,6 +55,7 @@ WORKDIR "/usr/local/etc/openldap/dbschema"
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/backsql_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_create.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_data.sql
+RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_metadata.sql
 
 WORKDIR "/usr/local/libexec/"
 
@@ -68,11 +69,12 @@ RUN echo "done" >> run.sh
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/backsql_create.sql" >> run.sh
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_create.sql" >> run.sh
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_data.sql" >> run.sh
+RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_metadata.sql" >> run.sh
 
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
 
 RUN echo "wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/LDAP/sku_github.schema -P /usr/local/etc/openldap/schema/" >> run.sh
-RUN echo "/usr/local/libexec/slapd" >> run.sh
+RUN echo "ulimit -n 1024 && /usr/local/libexec/slapd -F /usr/local/etc/openldap" >> run.sh
 
 CMD ["sh","/usr/local/libexec/run.sh"]
 
