@@ -25,5 +25,4 @@ insert into ldap_entries (id,dn,oc_map_id,parent,keyval)values (5,'documentTitle
 insert into ldap_entries (id,dn,oc_map_id,parent,keyval)values (6,'documentTitle=book2,dc=example,dc=com',2,1,2);
 insert into ldap_entries (id,dn,oc_map_id,parent,keyval)values (7,'ou=Referral,dc=example,dc=com',4,1,1);
 insert into ldap_entry_objclasses (entry_id,oc_name)values (1,'dcObject');
-insert into ldap_entry_objclasses (entry_id,oc_name)values (4,'pkiUser');
-insert into ldap_entry_objclasses (entry_id,oc_name)values (7,'extensibleObject');
+
