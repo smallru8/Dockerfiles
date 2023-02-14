@@ -57,6 +57,9 @@ RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariad
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_data.sql
 RUN wget https://raw.githubusercontent.com/smallru8/Dockerfiles/main/LDAP-Mariadb/conf.d/testdb_metadata.sql
 
+RUN echo 'CREATE TRIGGER `users_after_insert` AFTER INSERT ON `users` FOR EACH ROW BEGIN INSERT INTO ldap_entries(`dn`,`keyval`) VALUES (CONCAT("cn=",NEW.`name`,"'$LDAP_BASE_DN'"),NEW.`id`); INSERT INTO wallet(`id`) VALUES (NEW.`id`); END' >> testdb_metadata.sql
+RUN echo 'CREATE TRIGGER `users_before_delete` BEFORE DELETE ON `users` FOR EACH ROW BEGIN DELETE FROM `ldap_entries` WHERE `keyval`=OLD.`id`; END' >> testdb_metadata.sql
+
 WORKDIR "/usr/local/libexec/"
 
 RUN echo "ip=\$(curl -k -s https://checkip4.spdyn.de)" >> run.sh
