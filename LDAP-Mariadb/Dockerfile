@@ -68,7 +68,7 @@ RUN echo "done" >> run.sh
 
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/backsql_create.sql" >> run.sh
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_create.sql" >> run.sh
-RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_data.sql" >> run.sh
+#RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_data.sql" >> run.sh
 RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_metadata.sql" >> run.sh
 
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
