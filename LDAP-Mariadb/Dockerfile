@@ -74,7 +74,7 @@ RUN echo "isql ldap < /usr/local/etc/openldap/dbschema/testdb_metadata.sql" >> r
 RUN echo "rm -rf /usr/local/etc/openldap/schema/sku_github.schema" >> run.sh
 
 RUN echo "wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/s2p/LDAP/sku_github.schema -P /usr/local/etc/openldap/schema/" >> run.sh
-RUN echo "ulimit -n 1024 && /usr/local/libexec/slapd" >> run.sh
+RUN echo "ulimit -n 1024 && /usr/local/libexec/slapd -d -256" >> run.sh
 
 CMD ["sh","/usr/local/libexec/run.sh"]
 
