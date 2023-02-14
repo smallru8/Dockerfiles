@@ -19,5 +19,4 @@ insert into ldap_attr_mappings (id,oc_map_id,name,sel_expr,from_tbls,join_where,
 insert into ldap_attr_mappings (id,oc_map_id,name,sel_expr,from_tbls,join_where,add_proc,delete_proc,param_order,expect_return)values (15,1,'userCertificate','certs.cert','users,certs',        'certs.pers_id=users.id',NULL,NULL,3,0);
 insert into ldap_entries (id,dn,oc_map_id,parent,keyval)values (1,'dc=example,dc=com',3,0,1);
 -- insert into ldap_entries (id,dn,oc_map_id,parent,keyval)values (2,'cn=Mitya Kovalev,dc=example,dc=com',1,1,1);
-
 insert into ldap_entry_objclasses (entry_id,oc_name)values (1,'dcObject');
