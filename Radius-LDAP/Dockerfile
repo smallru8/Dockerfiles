@@ -9,8 +9,10 @@ ENV RADIUS_OBJCLASS=""
 
 RUN dnf install -y freeradius freeradius-ldap freeradius-utils freeradius-krb5 wget
 RUN cp /etc/raddb/clients.conf /etc/raddb/clients.conf.template
+RUN rm -rf /etc/raddb/mods-enabled/eap
 
 WORKDIR "/etc/raddb/policy.d"
+RUN rm -rf eap
 RUN rm -rf ldap
 RUN wget https://filedn.com/l9k5h2JrTgHFHmuFMPx0O6X/Download/radius_config/policy.d/ldap
 
